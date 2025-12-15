@@ -73,7 +73,9 @@ function validatePassword(password){
  * ----------------------------------------------------------- */
 
 // zde bude vaše řešení
-
+function extractTags(){
+    
+}
 
 /* -----------------------------------------------------------
  * Úloha 75: Čištění textu
