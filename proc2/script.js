@@ -73,8 +73,11 @@ function validatePassword(password){
  * ----------------------------------------------------------- */
 
 // zde bude vaše řešení
-function extractTags(){
-    
+function extractTags(tag) {
+
+    let reg = /<(\w+)[^>]*>.*?<\/\1>/gs;
+    return tag.match(reg)
+  
 }
 
 /* -----------------------------------------------------------
@@ -89,7 +92,14 @@ function extractTags(){
  * ----------------------------------------------------------- */
 
 // zde bude vaše řešení
+function cleanText(text){
+    let spaces_reg = /\s+/g
+    let special_reg = /[^a-zA-Z0-9\s]/g
 
+    text = text.replace(spaces_reg, "")
+    text = text.replace(special_reg, "")
+    return text
+}
 
 /* -----------------------------------------------------------
  * Úloha 76: Parsování CSV
@@ -100,7 +110,22 @@ function extractTags(){
  * ----------------------------------------------------------- */
 
 // zde bude vaše řešení
-
+function parseCSV(csv) {
+    const lines = csv.trim().split(/\r?\n/);
+    
+    return lines.map(line => {
+      
+      const regex = /"([^"]*)"/g;
+      let match;
+      const row = [];
+      
+      while ((match = regex.exec(line))) {
+        row.push(match[1]); 
+      }
+      
+      return row;
+    });
+  }
 
 /* -----------------------------------------------------------
  * Úloha 77: Validace kreditní karty
@@ -111,7 +136,14 @@ function extractTags(){
  * ----------------------------------------------------------- */
 
 // zde bude vaše řešení
-
+function validateCard(number) {
+    
+    let cleaned = number.replace(/\s+/g, '');
+    let visaRegex = /^4\d{12}(\d{3})?$/;
+    let masterRegex = /^(5[1-5]\d{14}|2(2[2-9]\d{12}|[3-6]\d{13}|7[01]\d{12}|720\d{12}))$/;
+    
+    return visaRegex.test(cleaned) || masterRegex.test(cleaned);
+  }
 
 /* -----------------------------------------------------------
  * Úloha 78: Minifikace CSS
@@ -123,7 +155,9 @@ function extractTags(){
  * ----------------------------------------------------------- */
 
 // zde bude vaše řešení
-
+function minifyCSS(css){
+    let reg
+}
 
 /* -----------------------------------------------------------
  * Úloha 79: Analyzátor logů
